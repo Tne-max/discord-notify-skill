@@ -1,0 +1,43 @@
+skill: discord-notify
+version: "0.1.0"
+
+catalog:
+  kind: skill
+  audience: public
+  visibility: public
+  role: canonical
+
+runners:
+  send:
+    default: true
+    type: graph
+    inputs:
+      proxy_host:
+        type: string
+        required: false
+        default: "api.nango.dev"
+        description: Nango API host.
+      connection_id:
+        type: string
+        required: true
+        description: Nango connection ID.
+      channel_id:
+        type: string
+        required: true
+        description: Discord channel ID.
+      content:
+        type: string
+        required: true
+        description: Message content.
+    runx:
+      connector: nango/discord
+    graph:
+      name: discord-send
+      steps:
+        - id: call
+          tool: discord.notify
+          inputs:
+            proxy_host: "$input.proxy_host"
+            connection_id: "$input.connection_id"
+            channel_id: "$input.channel_id"
+            content: "$input.content"

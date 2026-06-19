@@ -1,0 +1,62 @@
+{
+  "schema": "runx.tool.manifest.v1",
+  "name": "discord.notify",
+  "version": "0.1.0",
+  "description": "Governed action to send a message to a Discord channel.",
+  "source": {
+    "type": "http",
+    "url": "http://{proxy_host}/proxy/discord/channels/{channel_id}/messages",
+    "method": "POST",
+    "allow_private_network": true,
+    "headers": {
+      "authorization": "Bearer ${env:RUNX_NANGO_TOKEN}",
+      "nango-connection-id": "${input:connection_id}",
+      "content-type": "application/json"
+    }
+  },
+  "inputs": {
+    "proxy_host": {
+      "type": "string",
+      "required": false,
+      "default": "api.nango.dev",
+      "description": "Nango API host."
+    },
+    "connection_id": {
+      "type": "string",
+      "required": true,
+      "description": "Nango connection ID."
+    },
+    "channel_id": {
+      "type": "string",
+      "required": true,
+      "description": "Discord channel ID."
+    },
+    "content": {
+      "type": "string",
+      "required": true,
+      "description": "Message content."
+    }
+  },
+  "output": {
+    "named_emits": {
+      "message_sent": "runx.discord.message_sent.v1"
+    },
+    "packet": "runx.discord.send.v1",
+    "wrap_as": "send_receipt"
+  },
+  "scopes": [
+    "discord:write"
+  ],
+  "runx": {
+    "connector": "discord"
+  },
+  "runtime": {
+    "command": "node",
+    "args": [
+      "./run.mjs"
+    ]
+  },
+  "source_hash": "sha256:cc7b00235e9fa8b7ec01ce2f0d158fa15f85c0074b801245103813970f3586af",
+  "schema_hash": "sha256:d2923c791dc58de39b2d36c74a2dbdc4e50090210e71511d108ea6356d2c585d",
+  "toolkit_version": "0.2.0"
+}

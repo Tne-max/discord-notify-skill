@@ -1,0 +1,17 @@
+name: send-message
+kind: skill
+target: ..
+runner: send
+inputs:
+  proxy_host: "127.0.0.1:8732"
+  connection_id: "discord-user-123"
+  channel_id: "1234567890"
+  content: "Hello from runx!"
+expect:
+  status: sealed
+  receipt:
+    schema: runx.receipt.v1
+metadata:
+  public_skill: discord-notify
+  source_case: send-message
+  source: skills-fixture

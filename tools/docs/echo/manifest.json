@@ -1,0 +1,41 @@
+{
+  "schema": "runx.tool.manifest.v1",
+  "name": "docs.echo",
+  "version": "0.1.0",
+  "description": "Echo a docs message.",
+  "source": {
+    "type": "cli-tool",
+    "command": "node",
+    "args": [
+      "./run.mjs"
+    ]
+  },
+  "runtime": {
+    "command": "node",
+    "args": [
+      "./run.mjs"
+    ]
+  },
+  "inputs": {
+    "message": {
+      "type": "string",
+      "required": false,
+      "default": "hello"
+    }
+  },
+  "output": {
+    "packet": "discord.notify.echo.v1",
+    "wrap_as": "echo_packet"
+  },
+  "scopes": [
+    "docs.read"
+  ],
+  "runx": {
+    "artifacts": {
+      "wrap_as": "echo_packet"
+    }
+  },
+  "source_hash": "sha256:d7e8b86cf313e307322688e463ed4e25d397828c7fd46f9647db77fbb6a5b156",
+  "schema_hash": "sha256:c781f35fb380fc915de2a67ce2f3dfcc0d17f5de8db3e70cc1446a0e349a488e",
+  "toolkit_version": "0.1.4"
+}
